@@ -1,36 +1,3 @@
-// lib/api.ts
-
-// export type Note = {
-//   id: string;
-//   title: string;
-//   content: string;
-//   categoryId: string;
-//   userId: string;
-//   createdAt: string;
-//   updatedAt: string;
-// };
-
-// export type NoteListResponse = {
-//   notes: Note[];
-//   total: number;
-// };
-
-// axios.defaults.baseURL = "https://next-docs-api.onrender.com";
-
-// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-// export const getNotes = async () => {
-//   const res = await axios.get<NoteListResponse>("/notes");
-//   return res.data;
-// };
-
-// export const getSingleNote = async (id: string) => {
-//   const res = await axios.get<Note>(`/notes/${id}`);
-//   return res.data;
-// };
-
-// ! ================================
-
 import axios from "axios";
 import type { Note, NoteTag } from "../types/note";
 
@@ -112,6 +79,19 @@ export async function deleteNote(noteId: number): Promise<Note> {
   };
 
   const res = await axios.delete<Note>(url, { headers });
+
+  return res.data;
+}
+
+export async function getSingleNote(id: string): Promise<Note> {
+  const url = `${BASE_URL}/notes/${id}`;
+
+  const headers = {
+    Accept: "application/json",
+    Authorization: `Bearer ${TOKEN}`,
+  };
+
+  const res = await axios.get<Note>(url, { headers });
 
   return res.data;
 }

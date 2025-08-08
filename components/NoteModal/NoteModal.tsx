@@ -1,8 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import css from "./Modal.module.css";
-
-const modalRoot = document.getElementById("modal-root")!;
+import css from "@/components/NoteModal/NoteModal.module.css";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -10,7 +8,12 @@ interface ModalProps {
 }
 
 export default function Modal({ children, onClose }: ModalProps) {
+  const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
+
   useEffect(() => {
+    // Получаем элемент только в браузере
+    setModalRoot(document.getElementById("modal-root"));
+
     const handleEscape = (e: KeyboardEvent) => {
       if (e.code === "Escape") onClose();
     };
@@ -24,6 +27,9 @@ export default function Modal({ children, onClose }: ModalProps) {
       onClose();
     }
   };
+
+  // Пока modalRoot не найден — ничего не рендерим (защита от SSR ошибок)
+  if (!modalRoot) return null;
 
   return createPortal(
     <div
