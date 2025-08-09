@@ -8,7 +8,13 @@ import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import css from "@/app/notes/[id]/NoteDetails.client.module.css";
 
-export default function NoteDetailsClient() {
+type NoteDetailsClientProps = {
+  formattedDate: string;
+};
+
+export default function NoteDetailsClient({
+  formattedDate,
+}: NoteDetailsClientProps) {
   const params = useParams();
   const id = String(params.id);
 
@@ -21,13 +27,8 @@ export default function NoteDetailsClient() {
     queryFn: () => getSingleNote(id),
   });
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error || !note) {
-    return <ErrorMessage />;
-  }
+  if (isLoading) return <Loader />;
+  if (error || !note) return <ErrorMessage message="Something went wrong." />;
 
   return (
     <div className={css.container}>
@@ -36,7 +37,7 @@ export default function NoteDetailsClient() {
           <h2>{note.title}</h2>
         </div>
         <p className={css.content}>{note.content}</p>
-        <p className={css.date}>{note.createdAt}</p>
+        <p className={css.date}>{formattedDate}</p>
       </div>
     </div>
   );

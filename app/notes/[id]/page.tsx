@@ -8,22 +8,27 @@ import {
 import { getSingleNote } from "@/lib/api";
 import NoteDetailsClient from "@/app/notes/[id]/NoteDetails.client";
 
-export default async function NoteDetailsPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export default async function NoteDetailsPage({ params }: Props) {
   const { id } = await params;
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["note", Number(id)],
+
+  const note = await queryClient.fetchQuery({
+    queryKey: ["note", id],
     queryFn: () => getSingleNote(id),
   });
 
+  const formattedDate = note.updatedAt
+    ? `Updated at: ${new Date(note.updatedAt).toLocaleString()}`
+    : `Created at: ${new Date(note.createdAt).toLocaleString()}`;
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient />
+      <NoteDetailsClient formattedDate={formattedDate} />
     </HydrationBoundary>
   );
 }
