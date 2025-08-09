@@ -4,6 +4,8 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getSingleNote } from "@/lib/api";
 import { Note } from "@/types/note";
+import Loader from "@/components/Loader/Loader";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import css from "@/app/notes/NoteDetailsClient/NoteDetailsClient.module.css";
 
 export default function NoteDetailsClient() {
@@ -20,11 +22,11 @@ export default function NoteDetailsClient() {
   });
 
   if (isLoading) {
-    return <p>Loading, please wait...</p>;
+    return <Loader />;
   }
 
   if (error || !note) {
-    return <p>Something went wrong.</p>;
+    return <ErrorMessage />;
   }
 
   return (
