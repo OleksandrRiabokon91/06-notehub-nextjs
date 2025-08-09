@@ -17,18 +17,14 @@ export default async function NoteDetailsPage({ params }: Props) {
 
   const queryClient = new QueryClient();
 
-  const note = await queryClient.fetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: ["note", id],
     queryFn: () => getSingleNote(id),
   });
 
-  const formattedDate = note.updatedAt
-    ? `Updated at: ${new Date(note.updatedAt).toLocaleString()}`
-    : `Created at: ${new Date(note.createdAt).toLocaleString()}`;
-
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient formattedDate={formattedDate} />
+      <NoteDetailsClient />
     </HydrationBoundary>
   );
 }
