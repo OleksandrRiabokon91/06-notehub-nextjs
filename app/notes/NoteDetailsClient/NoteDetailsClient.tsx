@@ -10,7 +10,7 @@ import css from "@/app/notes/NoteDetailsClient/NoteDetailsClient.module.css";
 
 export default function NoteDetailsClient() {
   const params = useParams();
-  const id = String(params.id); // приведение к string явно
+  const id = String(params.id);
 
   const {
     data: note,
