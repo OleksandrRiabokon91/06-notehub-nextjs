@@ -25,12 +25,14 @@ import NoteDetailsClient from "@/app/notes/NoteDetailsClient/NoteDetailsClient";
 export default async function NoteDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["note", Number(params.id)],
-    queryFn: () => getSingleNote(String(params.id)),
+    queryKey: ["note", Number(id)],
+    queryFn: () => getSingleNote(id),
   });
 
   return (

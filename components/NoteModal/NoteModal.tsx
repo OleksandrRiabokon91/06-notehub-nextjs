@@ -13,7 +13,6 @@ export default function Modal({ children, onClose }: ModalProps) {
   const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    // Получаем элемент только в браузере
     setModalRoot(document.getElementById("modal-root"));
 
     const handleEscape = (e: KeyboardEvent) => {
@@ -30,7 +29,6 @@ export default function Modal({ children, onClose }: ModalProps) {
     }
   };
 
-  // Пока modalRoot не найден — ничего не рендерим (защита от SSR ошибок)
   if (!modalRoot) return null;
 
   return createPortal(

@@ -1,4 +1,3 @@
-// components/TanStackProvider/TanStackProvider.tsx
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -10,7 +9,6 @@ interface TanStackProviderProps {
 }
 
 export default function TanStackProvider({ children }: TanStackProviderProps) {
-  // useState, чтобы клиент создавался один раз
   const [queryClient] = useState(() => new QueryClient());
 
   return (

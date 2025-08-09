@@ -1,26 +1,3 @@
-// components/NoteList/NoteList.tsx
-
-// import { Note } from "../../types/note";
-// import NoteItem from "../NoteItem/NoteItem";
-
-// type Props = {
-//   notes: Note[];
-// };
-
-// const NoteList = ({ notes }: Props) => {
-//   return (
-//     <ul>
-//       {notes.map((note) => (
-//         <NoteItem key={note.id} item={note} />
-//       ))}
-//     </ul>
-//   );
-// };
-
-// export default NoteList;
-
-// ! =======================
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteNote } from "../../lib/api";
 import type { Note } from "../../types/note";
@@ -40,7 +17,7 @@ export default function NoteList({ notes }: NoteListProps) {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     },
     onError: (error) => {
-      console.error("Ошибка при удалении заметки:", error);
+      console.error("Delete error:", error);
     },
   });
 
