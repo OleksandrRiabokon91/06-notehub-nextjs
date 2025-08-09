@@ -1,5 +1,3 @@
-// Компонент Footer має створювати наступну розмітку:
-
 import css from "./Footer.module.css";
 
 const Footer = () => {
