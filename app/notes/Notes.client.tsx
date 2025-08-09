@@ -9,7 +9,7 @@ import { useDebounce } from "use-debounce";
 
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
-import NoteModal from "@/components/Modal/NoteModal";
+import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Loader from "@/components/Loader/Loader";
@@ -67,9 +67,9 @@ export default function NotesClient({ initialData }: NotesClientProps) {
         </div>
 
         {isModalOpen && (
-          <NoteModal onClose={() => setIsModalOpen(false)}>
+          <Modal onClose={() => setIsModalOpen(false)}>
             <NoteForm onClose={() => setIsModalOpen(false)} />
-          </NoteModal>
+          </Modal>
         )}
       </header>
 
