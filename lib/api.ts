@@ -70,7 +70,7 @@ export async function createNote(payload: CreateNotePayload): Promise<Note> {
   return res.data;
 }
 
-export async function deleteNote(noteId: number): Promise<Note> {
+export async function deleteNote(noteId: string): Promise<Note> {
   const url = `${BASE_URL}/notes/${noteId}`;
 
   const headers = {
