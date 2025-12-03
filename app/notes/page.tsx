@@ -1,4 +1,3 @@
-// app/notes/page.tsx
 import fetchNotes from "@/lib/api";
 import NotesClient from "./Notes.client";
 

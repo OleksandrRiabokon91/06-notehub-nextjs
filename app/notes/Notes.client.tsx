@@ -1,12 +1,9 @@
-// app/notes/page.tsx
 "use client";
 
 import css from "@/app/notes/Notes.client.module.css";
-
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
-
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import Modal from "@/components/Modal/Modal";
@@ -14,7 +11,6 @@ import NoteForm from "@/components/NoteForm/NoteForm";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
-
 import fetchNotes from "../../lib/api";
 import type { FetchNotesResponse } from "../../lib/api";
 
